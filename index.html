@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Saya - Developer & Tech Journal</title>
+  <style>
+    /* RESET & VARIABLES */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --border-color: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-color: #38bdf8;
+      --accent-hover: #0284c7;
+      --code-bg: #090d16;
+      --max-width: 800px;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    /* HEADER & AVATAR FRAME */
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .avatar-frame {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, var(--accent-color), #818cf8);
+      box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.3);
+      margin-bottom: 1.5rem;
+    }
+
+    .avatar-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      background-color: var(--card-bg);
+      display: block;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    header p.tagline {
+      color: var(--accent-color);
+      font-family: monospace;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    header p.bio {
+      color: var(--text-muted);
+      max-width: 600px;
+      font-size: 0.95rem;
+    }
+
+    /* WIDGET CURRENT STATUS */
+    .status-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent-color);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .status-card h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .status-card ul {
+      list-style: none;
+    }
+
+    .status-card li {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* SECTIONS */
+    section {
+      margin-bottom: 3rem;
+    }
+
+    section h2 {
+      font-size: 1.3rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* TECH STACK BADGES */
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .badge {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--accent-color);
+      font-family: monospace;
+      font-size: 0.85rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+    }
+
+    /* PROJECTS & JOURNAL CARDS */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.25rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-color);
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card h3 a {
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .card h3 a:hover {
+      color: var(--accent-color);
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: monospace;
+    }
+
+    .link-btn {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .link-btn:hover {
+      text-decoration: underline;
+    }
+
+    /* CODE SNIPPET STYLE (JOURNAL) */
+    pre {
+      background-color: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      overflow-x: auto;
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #e2e8f0;
+      margin-top: 0.75rem;
+    }
+
+    /* FOOTER & SOCIALS */
+    footer {
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      padding-top: 2rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .social-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--accent-color);
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (min-width: 640px) {
+      header {
+        flex-direction: row;
+        text-align: left;
+        gap: 2rem;
+      }
+
+      .avatar-frame {
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- HEADER SECTION -->
+    <header>
+      <div class="avatar-frame">
+        <!-- Ganti src dengan URL foto profil Anda atau nama file gambar di repositori (misal: profile.jpg) -->
+        <img src="https://via.placeholder.com/150" alt="Foto Profil" id="profile-img">
+      </div>
+      <div>
+        <h1>Nama Anda</h1>
+        <p class="tagline">&gt; Software Engineer & Tech Writer</p>
+        <p class="bio">
+          Suka membangun aplikasi web yang cepat, menulis tentang teknologi, dan mengeksplorasi arsitektur perangkat lunak terkini.
+        </p>
+      </div>
+    </header>
+
+    <!-- CURRENT STATUS WIDGET -->
+    <div class="status-card">
+      <h3>⚡ Currently / Kesibukan Saat Ini</h3>
+      <ul>
+        <li>💻 <strong>Sedang Membuat:</strong> Portfolio web minimalis</li>
+        <li>📖 <strong>Membaca:</strong> Clean Code karya Robert C. Martin</li>
+        <li>🎯 <strong>Fokus:</strong> JavaScript Modern, HTML/CSS, & GitHub Pages</li>
+      </ul>
+    </div>
+
+    <!-- TECH STACK SECTION -->
+    <section>
+      <h2>🛠️ Tech & Tools</h2>
+      <div class="badges">
+        <span class="badge">JavaScript (ES6+)</span>
+        <span class="badge">HTML5 & CSS3</span>
+        <span class="badge">Git & GitHub</span>
+        <span class="badge">Node.js</span>
+        <span class="badge">React</span>
+        <span class="badge">Tailwind CSS</span>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section>
+      <h2>🚀 Proyek Unggulan</h2>
+      <div class="card-grid">
+        
+        <div class="card">
+          <h3><a href="#" target="_blank">Aplikasi Pengelola Tugas</a></h3>
+          <p>Aplikasi to-do list interaktif berbasis web yang menyimpan data di browser secara lokal (LocalStorage).</p>
+          <div class="card-footer">
+            <span>JavaScript</span>
+            <a href="#" class="link-btn">Demo &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><a href="#" target="_blank">Web Dashboard Cuaca</a></h3>
+          <p>Mengambil data prakiraan cuaca secara real-time dari API publik dengan antarmuka yang modern.</p>
+          <div class="card-footer">
+            <span>API Integration</span>
+            <a href="#" class="link-btn">Demo &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- JOURNAL / BLOG SECTION -->
+    <section>
+      <h2>📝 Catatan & Jurnal Teknikal</h2>
+      <div class="card-grid" style="grid-template-columns: 1fr;">
+        
+        <div class="card">
+          <h3><a href="#">Cara Deploy Website Gratis Menggunakan GitHub Pages</a></h3>
+          <p>Panduan singkat menyatukan file HTML, CSS, dan JavaScript lalu mempublikasikannya dalam hitungan menit.</p>
+          <pre><code>git add .
+git commit -m "Deploy website"
+git push origin main</code></pre>
+          <div class="card-footer" style="margin-top: 0.75rem;">
+            <span>Dipublikasikan: 2026</span>
+            <a href="#" class="link-btn">Baca Selengkapnya &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER & SOCIALS -->
+    <footer>
+      <div class="social-links">
+        <a href="https://github.com" target="_blank">GitHub</a>
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+        <a href="https://twitter.com" target="_blank">Twitter / X</a>
+        <a href="mailto:email@domain.com">Email</a>
+      </div>
+      <p>&copy; <span id="year"></span> Nama Anda. Dibuat untuk GitHub Pages.</p>
+    </footer>
+
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Memperbarui tahun di bagian footer secara otomatis
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Opsional: Log pesan sambutan di console browser
+    console.log("Selamat datang di website profil saya!");
+  </script>
+
+</body>
+  </html>
